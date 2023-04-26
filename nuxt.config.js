@@ -12,7 +12,14 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // Find free favicon here
+      // https://www.iconsdb.com/deep-pink-icons/bottle-icon.html#custom_size
+      // Drop the free favicon in this website to generate all sizes and html code
+      // https://favicon.io/favicon-converter/
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/site.webmanifest' },
     ]
   },
 

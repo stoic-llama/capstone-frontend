@@ -1,30 +1,37 @@
 <template>
-    <div class="container d-flex justify-content-center align-items-center">
-        <form class="my-5" @submit.prevent="registerUser()">
-            <h2 class="fw-light">Let's make you a Formula Finder account.</h2>
-            <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" v-model="firstName">
-            </div>
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" v-model="lastName">
-            </div>
+    <main class="d-flex flex-column justify-content-between vh-100">
+        <div>
+            <AppNavBar />
+            <div class="container d-flex justify-content-center align-items-center">
+                <form class="my-5" @submit.prevent="registerUser()">
+                    <h2 class="fw-light">Let's make you a Formula Finder account.</h2>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" v-model="firstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" v-model="lastName">
+                    </div>
 
-            <div class="mb-3">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword" v-model="password">
-            </div>
-            <div class="mb-3">
-                <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="inputConfirmPassword" v-model="confirmedPassword">
-            </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" v-model="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="inputConfirmPassword" v-model="confirmedPassword">
+                    </div>
 
-            <button class="btn btn-dark round">Create Account</button>
+                    <button class="btn btn-dark round">Create Account</button>
 
-            <div v-show="message" class="form-text">Please enter a valid information for registration.</div>
-        </form>
-    </div>
+                    <div v-show="message" class="form-text">Please enter a valid information for registration.</div>
+                </form>
+            </div>
+        </div>
+        <AppFooter /> 
+        
+    </main>
 </template>
 
 <script>
@@ -56,12 +63,7 @@ export default {
                     email: this.$store.state.email,
                     password: this.password,
                 })
-                // Promise.all([
-                //     this.$store.dispatch('actionUpdateFirstName', res.data.user.firstName),
-                //     this.$store.dispatch('actionUpdateLastName', res.data.user.lastName),                        
-                // ])
-                .then((res) => {
-                    console.log(res.data.user)
+                .then(() => {
                     this.$router.push('/user/lookup')
                 })  
 

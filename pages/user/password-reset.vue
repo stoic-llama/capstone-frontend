@@ -1,26 +1,32 @@
 <template>
-    <div class="container d-flex justify-content-center align-items-center">
-        <form class="my-5" @submit.prevent="submitPassword(inputPassword)">
-            <h2 class="fw-light">Reset your account password.</h2>
-            <div class="mb-3">
-                <label for="OTP" class="form-label">Code</label>
-                <input type="password" class="form-control" aria-describedby="OTPHelp" id="OTP" v-model="OTP">
-                <div id="OTPHelp" class="form-text">Enter one time passcode that was sent to your email.</div>
-            </div>
-            <div class="mb-3">
-                <label for="inputPassword" class="form-label">New Password</label>
-                <input type="password" class="form-control" id="inputPassword" v-model="inputPassword">
-                <div v-show="!validatePassword(inputPassword, inputConfirmPassword)" class="form-text">Please enter password that matches.</div>
-            </div>
-            <div class="mb-3">
-                <label for="inputConfirmPassword" class="form-label">Confirm New Password</label>
-                <input type="password" class="form-control" id="inputConfirmPassword" v-model="inputConfirmPassword">
-                <div v-show="!validatePassword(inputPassword, inputConfirmPassword)" class="form-text">Please enter password that matches.</div>
-            </div>
+    <main class="d-flex flex-column justify-content-between vh-100">
+        <div>
+            <AppNavBar />
+            <div class="container d-flex justify-content-center align-items-center">
+                <form class="my-5" @submit.prevent="submitPassword(inputPassword)">
+                    <h2 class="fw-light">Reset your account password.</h2>
+                    <div class="mb-3">
+                        <label for="OTP" class="form-label">Code</label>
+                        <input type="password" class="form-control" aria-describedby="OTPHelp" id="OTP" v-model="OTP">
+                        <div id="OTPHelp" class="form-text">Enter one time passcode that was sent to your email.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="inputPassword" v-model="inputPassword">
+                        <div v-show="!validatePassword(inputPassword, inputConfirmPassword)" class="form-text">Please enter password that matches.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputConfirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="inputConfirmPassword" v-model="inputConfirmPassword">
+                        <div v-show="!validatePassword(inputPassword, inputConfirmPassword)" class="form-text">Please enter password that matches.</div>
+                    </div>
 
-            <button :disabled="initialState !== true" type="submit" class="btn btn-dark round" @click="submitPassword(inputPassword)">Reset Password</button>
-        </form>
-    </div>
+                    <button :disabled="initialState !== true" type="submit" class="btn btn-dark round" @click="submitPassword(inputPassword)">Reset Password</button>
+                </form>
+            </div>
+        </div>
+        <AppFooter /> 
+    </main>
 </template>
 
 <script>
