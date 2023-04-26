@@ -35,10 +35,11 @@ export default {
             let emailParameters = this.email.split('@')
             let url = this.$config.authURL + "/user/lookup"
             if(emailParameters.length === 2) {
-                const found = await this.$axios.post(url, {
+                const res = await this.$axios.post(url, {
                     email: this.email 
                 })
-                if (!found) { 
+                console.log(res)
+                if (res.data.user === null) { 
                     // User does not exist in database   
                     this.$store.dispatch('actionUpdateEmail', this.email).then(() => {
                         this.$router.push('/user/signup')

@@ -42,13 +42,11 @@ export default {
             this.message = false // turn off message, reset it
 
             if(this.password.length > 0) {
-                console.log("I'm here!")
                 let url = this.$config.authURL + "/auth/login"
                 const res = await this.$axios.post(url, {
                     email: this.$store.state.email,
                     password: this.password,
                 })
-                console.log(res)
                 if (!res) { 
                     // Password is not valid   
                     this.message = true

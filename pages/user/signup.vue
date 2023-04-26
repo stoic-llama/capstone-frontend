@@ -17,33 +17,26 @@
             </div>
             <div class="mb-3">
                 <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="inputConfirmPassword">
+                <input type="password" class="form-control" id="inputConfirmPassword" v-model="confirmedPassword">
             </div>
 
             <button class="btn btn-dark round">Create Account</button>
+
+            <div v-show="message" class="form-text">Please enter a valid information for registration.</div>
         </form>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
     data() {
         return {
             firstName: '',
             lastName: '',
             password: '',
+            confirmedPassword: '',
+            message: false,
         }
-    },
-    async fetch({ store }) {
-        await store.dispatch('getUsers')
-    },
-    computed: {
-        ...mapState([
-            'users',
-            'email',
-        ]),
     },
     mounted () {
         const email = this.$store.state.email
@@ -52,50 +45,31 @@ export default {
         } 
     },
     methods: {
-        registerUser() {
-            const newUser = {
-                Email: this.email,
-                First_name: this.firstName,
-                Last_name: this.lastName,
-                Password: this.password,
-                Permission: [], 
-            }
+        async registerUser() {
+            this.message = false //reset message to hide
 
-            const found = this.users.find( u => u.Email === newUser.Email) 
-            console.log("found: " + found)
-            if (!found) { // if new user not found in database...   
-                console.log(newUser)
-                Promise.all([
-                    this.createUser(newUser),
-                    this.$store.dispatch('actionAddUser', newUser),
-                    this.$store.dispatch('actionUpdateFirstName', newUser.First_name),
-                    this.$store.dispatch('actionUpdateLastName', newUser.Last_name),
-                ]).then(() => {
-                    console.log("done")
+            if (this.password === this.confirmedPassword && this.firstName !== '' && this.lastName !== '') { 
+                let url = this.$config.authURL + "/auth/register"
+                const res = await this.$axios.post(url, {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.$store.state.email,
+                    password: this.password,
+                })
+                // Promise.all([
+                //     this.$store.dispatch('actionUpdateFirstName', res.data.user.firstName),
+                //     this.$store.dispatch('actionUpdateLastName', res.data.user.lastName),                        
+                // ])
+                .then((res) => {
+                    console.log(res.data.user)
                     this.$router.push('/user/lookup')
                 })  
 
-                // this.$store.dispatch('actionAddUser', newUser)
-                //     .then((newUser) => {
-                //         console.log("newUser in the then()")
-                //         console.log(newUser)
-                //         this.$store.dispatch('createUser', newUser)
-                //     })
-                    // .then(() => {
-                    //     // this.$router.push('/user/lookup')
-                    //     console.log("done")
-                    // })  
+            }
+            else {
+                this.message = true
             }
         },
-        async createUser(newUser) {
-            console.log("adding new user " + newUser.Email)
-            try {
-                const res = await this.$api.user.create(newUser)
-                console.log(res) // success would be the newUser object
-            } catch (err) {
-                console.log(err)
-            }
-        }
     }
 }
 
