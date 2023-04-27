@@ -7,7 +7,7 @@
             </NuxtLink>
             <div class="d-flex align-items-center">
                 <div>
-                    <span class="greeting">Hi, {{ name }}</span> 
+                    <span class="greeting">{{ firstName === '' ? 'Hello Guest' : `Hello ${firstName}`}} </span> 
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -52,11 +52,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-    data() {
-        return {
-            name: 'Guest' 
-        }
+    computed: {
+        ...mapState([
+            'firstName',
+        ])
     },
 }
 
@@ -71,7 +73,6 @@ export default {
 .greeting {
     color: #ffbe0b;
     font-family: sans-serif;
-    font-style: italic;
     font-weight: 500;
 }
 .navbar {

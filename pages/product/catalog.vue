@@ -442,26 +442,11 @@ export default {
         },
     },
     mounted() {
-        ////////////////////////////
-        // Card Component Display //
-        ////////////////////////////
-
-        /* Refer Cards Component from https://inclusive-components.design/cards/ */
-        /* This is for the AppCard component */
-
-        // const cards = document.querySelectorAll('.card');  
-        // Array.prototype.forEach.call(cards, card => {  
-        //     let down, up, link = card.querySelector('h5 a');
-        //     card.style.cursor = 'pointer';  
-        //     card.onmousedown = () => down = +new Date();
-        //     card.onmouseup = () => {
-        //         up = +new Date();
-        //         if ((up - down) < 200) {
-        //             link.click();
-        //         }
-        //     }
-        // });
-    },
+        // Weird error where body is rendered overflow: hidden after user logs in
+        // Workaround now to force overflow (or scroll) to appear after login
+        const body = document.querySelector('body')
+        body.style.overflow = 'visible'
+    }
 }
 </script>
 

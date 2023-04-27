@@ -30,6 +30,9 @@
 </template>
 
 <script>
+
+// TODO: Need to finish wiring up the password reset API to the frontend
+
 export default {
     data() {
         return {
