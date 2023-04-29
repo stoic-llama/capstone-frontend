@@ -49,10 +49,12 @@ export const actions = {
     },
     actionUpdateQuery: ({commit}, query) => {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                commit('UPDATE_QUERY', query)
-                resolve()
-            }, "500")
+            commit('UPDATE_QUERY', query)
+            resolve()
+            // setTimeout(() => {
+            //     commit('UPDATE_QUERY', query)
+            //     resolve()
+            // }, "500")
         })
     },
     actionUpdateEmail: ({commit}, email) => {

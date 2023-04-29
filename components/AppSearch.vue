@@ -6,7 +6,7 @@
             </svg>            
         </span>
         <input type="text" class="form-control" v-model="query" placeholder="Search by infant formula name..." aria-label="Baby Formula Name">
-        <button class="btn btn-dark round" type="button" id="button-addon1">Search</button>
+        <button class="btn btn-dark round" type="button" id="button-addon1" @click="submitQuery(query)">Search</button>
     </form>
 </template>
 
