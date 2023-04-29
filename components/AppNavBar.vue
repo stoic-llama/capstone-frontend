@@ -33,14 +33,12 @@
                         My Account
                         </NuxtLink>
                         <ul class="dropdown-menu">
-                            <li><NuxtLink class="dropdown-item" to="/user/lookup">Edit My Profile</NuxtLink></li>
+                            <li><NuxtLink class="dropdown-item" to="/user/profile">My Profile</NuxtLink></li>
     
-                            <li><NuxtLink class="dropdown-item" to="/user/signup">Register New Account</NuxtLink></li>
-    
-                            <li>
+                            <!-- <li>
                                 <hr class="dropdown-divider">
-                            </li>
-                            <li><NuxtLink class="dropdown-item" to="#">Log Out</NuxtLink></li>
+                            </li> -->
+                            <li><NuxtLink class="dropdown-item" to="#" v-show="token !== ''">Log Out</NuxtLink></li>
                         </ul>
                     </li>
                     </ul>
@@ -57,6 +55,7 @@ import { mapState } from 'vuex';
 export default {
     computed: {
         ...mapState([
+            'token',
             'firstName',
         ])
     },
@@ -89,7 +88,7 @@ export default {
 .offcanvas {
     --bs-offcanvas-width: 250px;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
     .mobile {
         display: none;
     }
