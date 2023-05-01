@@ -260,9 +260,9 @@ export default {
                         "Longitude": store.Longitude,
                         "Latitude": store.Latitude,
                         "Store_name": store.Store_name,
-                        "Store_id": store.Store_id,
+                        "Store_id": store.Store_id, // mongodb _id
 
-                        "Internal_Product_Id": product._id,
+                        "Internal_Product_Id": product._id, // mongodb _id
                         "Product_id": product.Product_id,
                         "Product_family": product.Product_family,
                         "Product": product.Product,

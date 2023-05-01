@@ -57,5 +57,13 @@ export default {
   },
   privateRuntimeConfig: {
     // apiSecret: process.env.API_SECRET
-  }
+  },
+
+  // NOTE: Make sure to manually copy paste the server middleware folder when deploy to cloud
+  // https://github.com/nuxt/nuxt/issues/9158#issuecomment-820676790
+  serverMiddleware: [
+    '~/serverMiddleware/healthcheck',
+  ],
+  
+
 }
