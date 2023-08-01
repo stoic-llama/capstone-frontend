@@ -19,7 +19,7 @@ data() {
 methods: {
     submitQuery(q) {
         // this.$store.commit('UPDATE_QUERY', q)
-        this.$store.dispatch('actionUpdateQuery', this.query)
+        this.$store.dispatch('actionUpdateQuery', this.q)
     }
 }
 };
