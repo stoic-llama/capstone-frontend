@@ -25,9 +25,6 @@
                     <li class="nav-item">
                         <NuxtLink class="nav-link" to="/about">About</NuxtLink>
                     </li>
-                    <li class="nav-item">
-                        <NuxtLink class="nav-link" to="/test">Test</NuxtLink>
-                    </li>
                     <li class="nav-item dropdown">
                         <NuxtLink class="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         My Account
@@ -38,7 +35,9 @@
                             <!-- <li>
                                 <hr class="dropdown-divider">
                             </li> -->
-                            <li><NuxtLink class="dropdown-item" to="#" v-show="token !== ''">Log Out</NuxtLink></li>
+                            <li>
+                                <NuxtLink class="dropdown-item" to="/user/logout" v-show="token !== ''">Logout</NuxtLink>
+                            </li>
                         </ul>
                     </li>
                     </ul>
