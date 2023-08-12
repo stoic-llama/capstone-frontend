@@ -4,6 +4,7 @@ export default {
             res.setHeader('Content-Type', 'application/json');
             res.statusCode = 200;
             res.end(JSON.stringify({
+                name: 'capstone-frontend',
                 message: 'OK',
                 uptime: Math.floor(process.uptime()) + " seconds",
                 timestamp: formattedDateNow() // new Date(Date.now()).toString() 
@@ -12,6 +13,7 @@ export default {
             res.setHeader('Content-Type', 'application/json');
             res.statusCode = 500;
             res.end(JSON.stringify({
+                name: 'capstone-frontend',
                 message: error.message,
                 uptime: Math.floor(process.uptime()) + " seconds",
                 timestamp: formattedDateNow() // new Date(Date.now()).toString() 
