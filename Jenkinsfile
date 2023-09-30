@@ -10,6 +10,8 @@ pipeline {
             steps {
                 echo 'building the application...'
                 echo "application version ${version}"
+                sh 'docker login registry.digitalocean.com'
+                sh 'doctl registry repo list-v2'
             }
         }
 
