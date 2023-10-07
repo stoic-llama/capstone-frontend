@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         version = '1.5'
     }
