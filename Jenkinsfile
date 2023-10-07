@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'building the application...'
                 sh 'docker login registry.digitalocean.com'
-                sh 'docker auth init --context capstone-ccsu'
+                sh 'doctl auth init --context capstone-ccsu'
                 sh 'doctl registry repo list-v2'
                 sh "docker build -t capstone-frontend:${version} ."
                 sh "docker tag capstone-frontend:${version} registry.digitalocean.com/capstone-ccsu/capstone-frontend:${version}"
