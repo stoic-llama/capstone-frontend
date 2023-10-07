@@ -50,13 +50,29 @@ pipeline {
                         --name capstone-frontend \
                         --network helpmybabies \
                         registry.digitalocean.com/capstone-ccsu/capstone-frontend:${version}
-                        
+
                         docker ps
                         "
                     '''                    
                 }
-
             }
+        }
+    }
+
+    post {
+        always {
+            echo "Release finished and start clean up"
+            deleteDir() // the actual folder with the downloaded project code is deleted from build server
+        }
+        success {
+            echo "Release Success"
+        }
+        failure {
+            echo "Release Failed"
+        }
+        cleanup {
+            echo "Clean up in post workspace" 
+            cleanWs() // any reference this particular build is deleted from the agent
         }
     }
 
