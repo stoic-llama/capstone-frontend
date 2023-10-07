@@ -2,16 +2,19 @@ pipeline {
     agent any
 
     environment {
-        version = '1.0.1'
+        version = '1.5'
     }
 
     stages {
         stage("build") {
             steps {
                 echo 'building the application...'
-                echo "application version ${version}"
                 sh 'docker login registry.digitalocean.com'
+                sh 'docker auth init --context capstone-ccsu'
                 sh 'doctl registry repo list-v2'
+                sh "docker build -t capstone-frontend:${version} ."
+                sh "docker tag capstone-frontend:${version} registry.digitalocean.com/capstone-ccsu/capstone-frontend:${version}"
+                sh "docker push registry.digitalocean.com/capstone-ccsu/capstone-frontend:${version}"
             }
         }
 
