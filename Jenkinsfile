@@ -41,7 +41,7 @@ pipeline {
                 // Use the withCredentials block to access the secret file
                 withCredentials([string(credentialsId: 'website', variable: 'WEBSITE')]) {
                     sh """
-                        ssh -i .ssh/website_deploy_rsa_key $WEBSITE "docker run -d \
+                        ssh -i /var/jenkins_home/.ssh/website_deploy_rsa_key $WEBSITE "docker run -d \
                         -p 80:3700 \
                         --rm \
                         --name capstone-frontend \
