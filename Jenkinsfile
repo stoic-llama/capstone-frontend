@@ -2,12 +2,13 @@ pipeline {
     agent any
     environment {
         version = '1.5'
+        containerName = 'capstone-frontend'
     }
 
     stages {
         stage("login") {
             steps {
-                echo 'authenticating into jenkins server...'
+                echo 'authenticating into Digital Ocean repository...'
                 sh 'docker login registry.digitalocean.com'
                 
                 // note you need to manually add token for capstone-ccsu once 
@@ -38,10 +39,21 @@ pipeline {
             steps {
                 echo 'deploying the application...' 
 
+                withCredentials([
+                    string(credentialsId: 'website', variable: 'WEBSITE'),
+                ]) {
+                    script {
+                        // Use SSH to check if the container exists
+                        def containerExists = sh(script: 'ssh -i /var/jenkins_home/.ssh/website_deploy_rsa_key "${WEBSITE}" docker stop "${containerName}"', returnStatus: true)
+
+                        echo "containerExists: $containerExists"
+                    }
+                }
+
                 // Use the withCredentials block to access the credentials
                 // Note: need --rm when docker run.. so that docker stop can kill it cleanly
                 withCredentials([string(credentialsId: 'website', variable: 'WEBSITE')]) {
-                    sh 'ssh -i /var/jenkins_home/.ssh/website_deploy_rsa_key ${WEBSITE} "docker stop capstone-frontend"'
+                    // sh 'ssh -i /var/jenkins_home/.ssh/website_deploy_rsa_key ${WEBSITE} "docker stop capstone-frontend"'
 
                     sh '''
                         ssh -i /var/jenkins_home/.ssh/website_deploy_rsa_key ${WEBSITE} "docker run -d \
