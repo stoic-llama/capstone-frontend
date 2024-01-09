@@ -294,6 +294,7 @@ export default {
             let isFound = false
             if(user) {
                 // user was found 
+                console.log("User found!")
                 isFound = true
             }
             return isFound 
