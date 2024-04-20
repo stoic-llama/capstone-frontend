@@ -41,16 +41,17 @@ export default {
         async submitPassword() {            
             this.message = false // turn off message, reset it
 
+            console.log("Password submitted!")
+
             if(this.password.length > 0) {
                 let url = this.$config.authURL + "/auth/login"
-                const res = await this.$axios.post(url, {
-                    email: this.$store.state.email,
-                    password: this.password,
-                })
-                if (!res) { 
-                    // Password is not valid   
-                    this.message = true
-                } else {
+                
+                try {
+                    const res = await this.$axios.post(url, {
+                        email: this.$store.state.email,
+                        password: this.password,
+                    })
+
                     // Password is valid
                     Promise.all([
                         this.$store.dispatch('actionUpdateFirstName', res.data.user.firstName),
@@ -60,8 +61,13 @@ export default {
                     .then(() => {
                         this.$router.push('/')
                     })
+
+                } catch(error) {
+                    // Password is not valid   
+                    this.message = true
                 }
             } else {
+                // Password is not valid because empty!  
                 this.message = true
             } 
         },
