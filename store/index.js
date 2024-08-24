@@ -2,6 +2,7 @@ export const state = () => ({
     "token": '',
     "query": '',
     "stores": [],
+    "likes": [], 
     "email": '',
     "firstName": '',
     "lastName": '',
@@ -24,6 +25,9 @@ export const mutations = {
     UPDATE_STORES: (state, stores) => {
         state.stores = stores
     },
+    UPDATE_LIKES: (state, likes) => {
+        state.likes = likes
+    },
     UPDATE_EMAIL: (state, email) => {
         state.email = email
     },
@@ -34,7 +38,7 @@ export const mutations = {
         state.lastName = lastName
     },
     // UPDATE_PASSWORD: (state, password) => {
-    //     state.password = password
+        //     state.password = password
     // },
 }
 
@@ -93,7 +97,7 @@ export const actions = {
 /////////////////
 
     async getStores({ commit }) {
-        const res = await this.$axios.get(this.$config.baseURL + "/stores")
+        const res = await this.$axios.get(this.$config.baseURL + "/product/stores")
         const { status, data } = res
         // console.log(data[0].Store_items[0])
         if (status === 200) {
@@ -103,4 +107,17 @@ export const actions = {
             console.log("couldn't get stores")
         }
     },
+
+    // async getLikes({ commit }) {
+    //     const res = await this.$axios.get(this.$config.baseURL + "/product/likes")
+    //     const { status, data } = res
+    //     // console.log(data[0].Store_items[0])
+    //     if (status === 200) {
+    //         commit('UPDATE_LIKES', data)
+    //     } else {
+    //         // Handle error here
+    //         console.log("couldn't get likes")
+    //     }
+    // },
+
 }    

@@ -11,17 +11,17 @@
 
 <script>
 export default {
-data() {
-    return {
-        q: ''
+    data() {
+        return {
+            q: ''
+        }
+    },
+    methods: {
+        submitQuery(q) {
+            // this.$store.commit('UPDATE_QUERY', q)
+            this.$store.dispatch('actionUpdateQuery', this.q)
+        }
     }
-},
-methods: {
-    submitQuery(q) {
-        // this.$store.commit('UPDATE_QUERY', q)
-        this.$store.dispatch('actionUpdateQuery', this.q)
-    }
-}
 };
 </script>
 

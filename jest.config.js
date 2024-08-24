@@ -13,10 +13,15 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest'
   },
+  // snapshotSerializers: [
+  //   '<rootDir>/node_modules/jest-serializer-vue'
+  // ],
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
+    // '<rootDir>/pages/**/*.vue',
+    '<rootDir>/serverMiddleware/**/*.js',
+    // '<rootDir>/store/**/*.js',
   ],
   testEnvironment: 'jsdom'
 }

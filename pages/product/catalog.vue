@@ -203,10 +203,12 @@ export default {
     },  
     async fetch({ store }) {
         await store.dispatch('getStores')
+        await store.dispatch('getLikes')
     },
 	computed: {
         ...mapState([
             'stores',
+            'likes',
             'query',
             'email',
         ]),
@@ -273,8 +275,8 @@ export default {
                         "Product_img_url": product.Product_img_url, 
                         "Total_likes": product.Total_likes,
                         "Total_dislikes": product.Total_dislikes,
-                        "Likes": this.findUser(product.Likes),
-                        "Dislikes": this.findUser(product.Dislikes),
+                        // "Likes": this.findUser(product.Likes),
+                        // "Dislikes": this.findUser(product.Dislikes),
                     })
                 })
             })
@@ -289,6 +291,9 @@ export default {
 
             return cards
         },
+
+
+
         findUser(users){
             const user = users.find( user => this.email === user.email )
             let isFound = false

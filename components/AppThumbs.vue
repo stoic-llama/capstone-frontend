@@ -44,11 +44,12 @@ export default {
         };
     },
     methods: {
-        like() {
-        this.likes += 1;
-        },
-        dislike() {
-        this.dislikes += 1;
+        submitQuery(q) {
+            // this.$store.commit('UPDATE_QUERY', q)
+            this.$store.dispatch('actionUpdateQuery', this.query)
+            .then(() => {
+                this.$router.push('/product/catalog')
+            })
         }
     },
     mounted() {
