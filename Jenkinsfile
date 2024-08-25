@@ -53,8 +53,8 @@ pipeline {
                 echo '#################################'
                 script {
                     // Check if the container exists 
-                        // --> If yes, stop and remove it
-                        // --> If no, display result true for both stop and rm command, no harm done 
+                    // --> If yes, stop and remove it
+                    // --> If no, display result true for both stop and rm command, no harm done 
                     // Then let Jenkins continue
                     def containerStopped = sh(script: 'docker stop ${containerName}', returnStatus: true) == 0
 
@@ -128,7 +128,7 @@ pipeline {
                     echo '# Unit Tests #'
                     echo '##############'
                     sh '''
-                        docker exec capstone-backend sh -c "npm run test"
+                        docker exec capstone-frontend sh -c "npm run test"
                     '''
 
                     echo '#####################'

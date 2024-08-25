@@ -3,7 +3,7 @@
 # docker run -p 3700:3700 --rm --name capstone-frontend capstone-frontend:1.2
 
 # Dockerfile
-FROM node:16-alpine
+FROM node:22-alpine
 
 ENV API_BASE_URL='http://helpmybabies.com:5000/api/v1' 
 ENV API_AUTH_URL='http://helpmybabies.com:5400/api/v1' 
