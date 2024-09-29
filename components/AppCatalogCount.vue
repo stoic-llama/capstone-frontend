@@ -12,6 +12,7 @@
 
 <script>
 export default {
+    name: 'AppCatalogCount',
     props: {
         query: {
             type: String,

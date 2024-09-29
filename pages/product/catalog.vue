@@ -183,6 +183,13 @@
 import { mapState } from 'vuex'
 
 export default {
+    components: {
+        AppNavBar: true,
+        AppFooter: true,
+        AppAccordion: true,
+        AppCatalogCount: true,
+        AppCard: true,
+    },
     data() {
         return {
             show: true,

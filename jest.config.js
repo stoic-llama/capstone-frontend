@@ -23,5 +23,5 @@ module.exports = {
     '<rootDir>/serverMiddleware/**/*.js',
     // '<rootDir>/store/**/*.js',
   ],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
 }

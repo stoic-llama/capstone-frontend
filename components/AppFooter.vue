@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name: 'AppFooter',
     computed: {
         currentYear() {
             return new Date().getFullYear().toString()            

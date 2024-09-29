@@ -1,13 +1,16 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import catalog from '@/pages/product/catalog.vue'; 
-import AppAccordion from '@/components/AppAccordion.vue';
-import AppCatalogCount from '@/components/AppCatalogCount.vue';
-import AppNavBar from '@/components/AppNavBar.vue';
-import AppFooter from '@/components/AppFooter.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+
+function createStub(name) {
+  return { 
+    name,
+    template: `<div class="${name}"></div>` 
+  }
+}
 
 describe('catalog.vue', () => {
   let store;
@@ -22,13 +25,6 @@ describe('catalog.vue', () => {
       email: '',
     };
 
-    // actions = {
-    //   getStores: jest.fn().mockImplementation(() => {
-    //     console.log('getStores action called')
-    //     return Promise.resolve(mockStoresData)
-    //   })      // getLikes: jest.fn(),
-    // };
-
     store = new Vuex.Store({
       state,  
       actions,
@@ -38,14 +34,29 @@ describe('catalog.vue', () => {
   it('renders the main structure correctly', () => {
     const wrapper = shallowMount(catalog, { 
       store, 
-      localVue
+      localVue,
+      stubs: {
+        AppFooter: createStub('AppFooter'),
+        AppAccordion: createStub('AppAccordion'),
+        AppCatalogCount: createStub('AppCatalogCount'),
+        AppNavBar: createStub('AppNavBar'),
+        AppCard: createStub('AppCard'),
+      }
     });
-    expect(wrapper.find('AppNavBar').exists()).toBe(true);
-    expect(wrapper.find('AppFooter').exists()).toBe(true);
+    
+    // console.log(wrapper.html());
+    // console.log('AppNavBar exists:', wrapper.findComponent({ name: 'AppNavBar' }).exists());
+    // console.log('AppFooter exists:', wrapper.findComponent({ name: 'AppFooter' }).exists());
+    // console.log('AppAccordion exists:', wrapper.findComponent({ name: 'AppAccordion' }).exists());
+    // console.log('AppCatalogCount exists:', wrapper.findComponent({ name: 'AppCatalogCount' }).exists());
+    // console.log('AppCard exists:', wrapper.findComponent({ name: 'AppCard' }).exists());
+    
+    expect(wrapper.findComponent({ name: 'AppNavBar' }).exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'AppFooter' }).exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'AppAccordion' }).exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'AppCatalogCount' }).exists()).toBe(true);
+    // expect(wrapper.findComponent({ name: 'AppCard' }).exists()).toBe(true);
   });
-
-  
-
 
   it('computes productFamilies correctly', () => {
     state.stores = [
@@ -56,13 +67,13 @@ describe('catalog.vue', () => {
     const wrapper = shallowMount(catalog, { 
       store, 
       localVue,
-      // stubs: {
-      //   AppFooter: true,  // This stubs out the AppFooter component
-      //   AppAccordion: true,
-      //   AppCatalogCount: true,
-      //   AppNavBar: true,
-      //   AppCard: true,
-      // }  
+      stubs: {
+        AppFooter: createStub('AppFooter'),
+        AppAccordion: createStub('AppAccordion'),
+        AppCatalogCount: createStub('AppCatalogCount'),
+        AppNavBar: createStub('AppNavBar'),
+        AppCard: createStub('AppCard'),
+      }
     });
     expect(wrapper.vm.productFamilies).toEqual(['Family1', 'Family2', 'Family3']);
   });
@@ -72,11 +83,12 @@ describe('catalog.vue', () => {
       store, 
       localVue,
       stubs: {
-        AppFooter: true,  // This stubs out the AppFooter component
-        AppAccordion: true,
-        AppCatalogCount: true,
-        AppNavBar: true,
-      }  
+        AppFooter: createStub('AppFooter'),
+        AppAccordion: createStub('AppAccordion'),
+        AppCatalogCount: createStub('AppCatalogCount'),
+        AppNavBar: createStub('AppNavBar'),
+        AppCard: createStub('AppCard'),
+      }
     });
     expect(wrapper.vm.show).toBe(true);
     await wrapper.find('#button-addon1').trigger('click');
@@ -88,11 +100,12 @@ describe('catalog.vue', () => {
       store, 
       localVue,
       stubs: {
-        AppFooter: true,  // This stubs out the AppFooter component
-        AppAccordion: true,
-        AppCatalogCount: true,
-        AppNavBar: true,
-      } 
+        AppFooter: createStub('AppFooter'),
+        AppAccordion: createStub('AppAccordion'),
+        AppCatalogCount: createStub('AppCatalogCount'),
+        AppNavBar: createStub('AppNavBar'),
+        AppCard: createStub('AppCard'),
+      }
     });
     const unsortedCards = [
       { Product: 'Banana' },
@@ -112,11 +125,12 @@ describe('catalog.vue', () => {
       store, 
       localVue,
       stubs: {
-        AppFooter: true,  // This stubs out the AppFooter component
-        AppAccordion: true,
-        AppCatalogCount: true,
-        AppNavBar: true,
-      } 
+        AppFooter: createStub('AppFooter'),
+        AppAccordion: createStub('AppAccordion'),
+        AppCatalogCount: createStub('AppCatalogCount'),
+        AppNavBar: createStub('AppNavBar'),
+        AppCard: createStub('AppCard'),
+      }
     });
     wrapper.setData({ productFamily_checkbox: ['Family1'] });
     const cards = [

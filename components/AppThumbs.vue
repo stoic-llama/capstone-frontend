@@ -34,6 +34,7 @@
   
 <script>
 export default {
+    name: 'AppThumbs',
     data() {
         return {
             likes: 989,

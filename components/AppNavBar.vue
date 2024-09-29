@@ -52,6 +52,7 @@
 import { mapState } from 'vuex';
 
 export default {
+    name: 'AppNavBar',
     computed: {
         ...mapState([
             'token',

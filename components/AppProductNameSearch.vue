@@ -11,6 +11,7 @@
 
 <script>
 export default {
+    name: 'AppProductNameSearch',
     data() {
         return {
             q: ''
