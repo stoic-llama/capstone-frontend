@@ -19,7 +19,7 @@
     </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 const props = defineProps({
     extURL: {
         type: String,
@@ -34,6 +34,17 @@ const props = defineProps({
         default: '',
     }
 })
+</script> -->
+
+<script>
+export default {
+    name: 'AppCard',
+    props: {
+        extURL: String,
+        imgURL: String,
+        imgAlt: String,
+    },
+};
 </script>
 
 <style lang="scss" scoped>

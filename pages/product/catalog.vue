@@ -300,6 +300,8 @@ export default {
             // sort the filtered cards alphabetically by product name (*.Product)
             cards = this.sortAlphabetically(cards)
 
+            // console.log(cards); // Add this line in the generateCards method to see the generated cards
+
             return cards
         },
 

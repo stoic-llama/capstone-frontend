@@ -19,7 +19,42 @@ describe('catalog.vue', () => {
 
   beforeEach(() => {
     state = {
-      stores: [],
+      stores: [ // Mock stores data
+        {
+          Company: 'Store 1',
+          Zip_code: '12345',
+          Address_line1: '123 Main St',
+          Address_line2: '',
+          City: 'City A',
+          State: 'State A',
+          Store_items: [
+            {
+              _id: '1',
+              Product_id: 'prod1',
+              Product_family: 'Family A',
+              Product: 'Product 1',
+              Price: 10,
+              Availability: 'In Stock',
+              Total_likes: 5,
+              Total_dislikes: 1,
+              Product_url: 'http://example.com/product1',
+              Product_img_url: 'http://example.com/image1.jpg',
+            },
+            {
+              _id: '2',
+              Product_id: 'prod2',
+              Product_family: 'Family B',
+              Product: 'Product 2',
+              Price: 20,
+              Availability: 'Out of Stock',
+              Total_likes: 3,
+              Total_dislikes: 0,
+              Product_url: 'http://example.com/product2',
+              Product_img_url: 'http://example.com/image2.jpg',
+            },
+          ],
+        },
+      ],
       likes: [],
       query: '',
       email: '',
@@ -41,6 +76,7 @@ describe('catalog.vue', () => {
         AppCatalogCount: createStub('AppCatalogCount'),
         AppNavBar: createStub('AppNavBar'),
         AppCard: createStub('AppCard'),
+        // AppThumbs: createStub('AppThumbs')
       }
     });
     
@@ -55,7 +91,8 @@ describe('catalog.vue', () => {
     expect(wrapper.findComponent({ name: 'AppFooter' }).exists()).toBe(true);
     expect(wrapper.findComponent({ name: 'AppAccordion' }).exists()).toBe(true);
     expect(wrapper.findComponent({ name: 'AppCatalogCount' }).exists()).toBe(true);
-    // expect(wrapper.findComponent({ name: 'AppCard' }).exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'AppCard' }).exists()).toBe(true);
+    // expect(wrapper.findComponent({ name: 'AppThumbs' }).exists()).toBe(true);
   });
 
   it('computes productFamilies correctly', () => {
