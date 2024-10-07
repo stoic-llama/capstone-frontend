@@ -105,7 +105,7 @@
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="mb-5">
                                                 <div class="me-2">{{ card.Availability }}</div>
-                                                <AppThumbs></AppThumbs>
+                                                <AppThumbs :likes="Number(card.Total_likes)" :dislikes="Number(card.Total_dislikes)"></AppThumbs>
                                             </div>
                                             <div>
                                                 <div>
@@ -131,7 +131,8 @@
                             </div>
                         </div>
                     </section>
-        
+                    
+                    <!-- Below is for displaying cards when side menu hidden. Refer Toggle Side Menu option. -->
                     <section class="col-sm-12 mb-4" v-show="!show">
                         <div class="col">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -148,7 +149,7 @@
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="mb-5">
                                                 <div class="me-2">{{ card.Availability }}</div>
-                                                <AppThumbs></AppThumbs>
+                                                <AppThumbs :likes="Number(card.Total_likes)" :dislikes="Number(card.Total_dislikes)"></AppThumbs>
                                             </div>                                    
                                             <div>
                                                 <div>
@@ -183,12 +184,15 @@
 import { mapState } from 'vuex'
 
 export default {
+    name: 'Catalog',
     components: {
-        AppNavBar: true,
-        AppFooter: true,
-        AppAccordion: true,
-        AppCatalogCount: true,
-        AppCard: true,
+        AppNavBar: () => import('@/components/AppNavBar.vue'),
+        AppFooter: () => import('@/components/AppFooter.vue'),
+        AppAccordion: () => import('@/components/AppAccordion.vue'),
+        AppCatalogCount: () => import('@/components/AppCatalogCount.vue'),
+        AppCard: () => import('@/components/AppCard.vue'),
+        AppThumbs: () => import('@/components/AppThumbs.vue'),
+        AppProductNameSearch: () => import('@/components/AppProductNameSearch.vue'),
     },
     data() {
         return {
@@ -210,7 +214,7 @@ export default {
     },  
     async fetch({ store }) {
         await store.dispatch('getStores')
-        await store.dispatch('getLikes')
+        // await store.dispatch('getLikes')
     },
 	computed: {
         ...mapState([
