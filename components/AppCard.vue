@@ -1,10 +1,10 @@
 <template>
     <div class="col">
         <div class="card h-100">
-            <img class="card-img-top" :src="props.imgURL" :alt="props.imgAlt">
+            <img class="card-img-top" :src="imgURL" :alt="imgAlt"> 
             <div class="card-body">
                 <h5 class="card-title">
-                    <a :href="props.extURL">
+                    <a :href="extURL">
                         <slot name="title" />
                     </a>
                 </h5>
@@ -19,30 +19,22 @@
     </div>
 </template>
 
-<!-- <script setup>
-const props = defineProps({
-    extURL: {
-        type: String,
-        default: '',
-    },
-    imgURL: {
-        type: String,
-        default: ''
-    },
-    imgAlt: {
-        type: String,
-        default: '',
-    }
-})
-</script> -->
-
 <script>
 export default {
     name: 'AppCard',
     props: {
-        extURL: String,
-        imgURL: String,
-        imgAlt: String,
+        extURL: {
+            type: String,
+            default: '', 
+        },
+        imgURL: {
+            type: String,
+            default: '', 
+        },
+        imgAlt: {
+            type: String,
+            default: '', 
+        },
     },
 };
 </script>
