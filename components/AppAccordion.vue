@@ -16,28 +16,29 @@
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+props.accordionId+'-collapseOne'" aria-expanded="true" :aria-controls="props.accordionId+'-collapseOne'">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="'#' + accordionId + '-collapseOne'" aria-expanded="true" :aria-controls="accordionId + '-collapseOne'">
                         <slot name="title" />
                     </button>
                 </h2>
-                <div :id="props.accordionId+'-collapseOne'" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div :id="accordionId + '-collapseOne'" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
                         <slot name="body" />
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
-<script setup>
-const props = defineProps({
-    accordionId: {
-        type: String,
-        required: true,
+<script>
+export default {
+    props: {
+        accordionId: {
+            type: String,
+            required: true,
+        }
     }
-})
+}
 </script>
 
 <style lang="scss" scoped>
