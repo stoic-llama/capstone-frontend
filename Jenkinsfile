@@ -112,7 +112,7 @@ pipeline {
                         docker exec capstone-frontend sh -c "
                             echo 'Initiating cloc from kent c dodds...'
 
-                            npx cloc components pages plugins serverMiddleware store --by-file --include-ext=js,vue
+                            npx cloc components pages plugins serverMiddleware store test --by-file --include-ext=js,vue
                         "
                     '''
 

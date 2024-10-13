@@ -10,7 +10,7 @@ module.exports = {
         "assets/**/*",
         "coverage/**/*",
         "node_modules/**/*", 
-        "test/**/*",
+        // "test/**/*",
         "static/**/*",
     ],
     "rules": {
