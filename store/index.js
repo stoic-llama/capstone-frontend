@@ -2,7 +2,6 @@ export const state = () => ({
     "token": '',
     "query": '',
     "stores": [],
-    "likes": [], 
     "email": '',
     "firstName": '',
     "lastName": '',
@@ -24,9 +23,6 @@ export const mutations = {
     },
     UPDATE_STORES: (state, stores) => {
         state.stores = stores
-    },
-    UPDATE_LIKES: (state, likes) => {
-        state.likes = likes
     },
     UPDATE_EMAIL: (state, email) => {
         state.email = email
@@ -108,16 +104,29 @@ export const actions = {
         }
     },
 
-    // async getLikes({ commit }) {
-    //     const res = await this.$axios.get(this.$config.baseURL + "/product/likes")
-    //     const { status, data } = res
-    //     // console.log(data[0].Store_items[0])
-    //     if (status === 200) {
-    //         commit('UPDATE_LIKES', data)
-    //     } else {
-    //         // Handle error here
-    //         console.log("couldn't get likes")
-    //     }
-    // },
-
+    async postVote({ commit }, vote) {
+        try {
+            const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                store_id: vote.store_id,
+                product_id: vote.product_id, 
+                email: vote.email,
+                like: vote.like, 
+                dislike: vote.dislike, 
+            });
+    
+            const { status, data } = res;
+    
+            if (status === 200) {
+                // Optionally commit a mutation to update the state with the new vote data
+                // commit('UPDATE_VOTE_DATA', data);
+                return data; // Return the data for further processing if needed
+            } else {
+                console.error(`Error: Received status code ${status}`);
+                throw new Error(`Unexpected status code when submitting vote: ${status}`);
+            }
+        } catch (error) {
+            console.error("Network error when submitting vote:", error.message);
+            return error;
+        }
+    }
 }    

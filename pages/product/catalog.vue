@@ -105,7 +105,13 @@
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="mb-5">
                                                 <div class="me-2">{{ card.Availability }}</div>
-                                                <AppThumbs :likes="Number(card.Total_likes)" :dislikes="Number(card.Total_dislikes)"></AppThumbs>
+                                                <AppThumbs 
+                                                    :total_likes="Number(card.Total_likes)" 
+                                                    :total_dislikes="Number(card.Total_dislikes)"
+                                                    :store_id="card.Store_id"
+                                                    :product_id="card.Product_id"
+                                                >
+                                                </AppThumbs>
                                             </div>
                                             <div>
                                                 <div>
@@ -149,7 +155,13 @@
                                         <div class="d-flex flex-column justify-content-between">
                                             <div class="mb-5">
                                                 <div class="me-2">{{ card.Availability }}</div>
-                                                <AppThumbs :likes="Number(card.Total_likes)" :dislikes="Number(card.Total_dislikes)"></AppThumbs>
+                                                <AppThumbs 
+                                                    :total_likes="Number(card.Total_likes)" 
+                                                    :total_dislikes="Number(card.Total_dislikes)"
+                                                    :store_id="card.Store_id"
+                                                    :product_id="card.Product_id"
+                                                >
+                                                </AppThumbs>
                                             </div>                                    
                                             <div>
                                                 <div>
@@ -214,12 +226,10 @@ export default {
     },  
     async fetch({ store }) {
         await store.dispatch('getStores')
-        // await store.dispatch('getLikes')
     },
 	computed: {
         ...mapState([
             'stores',
-            'likes',
             'query',
             'email',
         ]),

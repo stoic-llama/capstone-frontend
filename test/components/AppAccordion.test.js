@@ -14,7 +14,7 @@ describe('AppAccordion.vue', () => {
             },
         });
 
-        console.log('html: ', wrapper.html());
+        // console.log('html: ', wrapper.html());
 
         // Check if the title slot is rendered correctly
         expect(wrapper.find('.accordion-button').text()).toBe('Test Title');

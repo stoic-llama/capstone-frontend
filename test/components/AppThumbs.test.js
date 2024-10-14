@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import Vue from 'vue'; // Add this import
-import Vuex from 'vuex'; // Add this import
+import Vue from 'vue'; 
+import Vuex from 'vuex'; 
 import AppThumbs from '@/components/AppThumbs.vue';
 
-Vue.use(Vuex); // Add this line to use Vuex
+Vue.use(Vuex); 
 
 describe('AppThumbs.vue', () => {
   let store;
@@ -20,20 +20,20 @@ describe('AppThumbs.vue', () => {
     wrapper = shallowMount(AppThumbs, {
       store,
       propsData: {
-        likes: 10,
-        dislikes: 5,
+        total_likes: 10,
+        total_dislikes: 5,
       },
     });
   });
 
   it('renders correctly with given props', () => {
-    expect(wrapper.find('span').text()).toBe('10'); // Check likes
-    expect(wrapper.findAll('span').at(1).text()).toBe('5'); // Check dislikes
+    expect(wrapper.find('span').text()).toBe('10'); 
+    expect(wrapper.findAll('span').at(1).text()).toBe('5'); 
   });
 
-  it('displays the correct number of likes and dislikes', () => {
-    expect(wrapper.props().likes).toBe(10);
-    expect(wrapper.props().dislikes).toBe(5);
+  it('displays the correct number of total likes and dislikes', () => {
+    expect(wrapper.props().total_likes).toBe(10);
+    expect(wrapper.props().total_dislikes).toBe(5);
   });
 
 //   it('emits actionUpdateQuery when the like button is clicked', async () => {
