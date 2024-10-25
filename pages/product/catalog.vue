@@ -160,6 +160,8 @@
                                                     :total_dislikes="Number(card.Total_dislikes)"
                                                     :store_id="card.Store_id"
                                                     :product_id="card.Product_id"
+                                                    :likesArray="card.Likes"
+                                                    :dislikesArray="card.Dislikes"
                                                 >
                                                 </AppThumbs>
                                             </div>                                    
@@ -296,8 +298,8 @@ export default {
                         "Product_img_url": product.Product_img_url, 
                         "Total_likes": product.Total_likes,
                         "Total_dislikes": product.Total_dislikes,
-                        // "Likes": this.findUser(product.Likes),
-                        // "Dislikes": this.findUser(product.Dislikes),
+                        "Likes": product.Likes,
+                        "Dislikes": product.Dislikes,
                     })
                 })
             })
@@ -317,16 +319,16 @@ export default {
 
 
 
-        findUser(users){
-            const user = users.find( user => this.email === user.email )
-            let isFound = false
-            if(user) {
-                // user was found 
-                console.log("User found!")
-                isFound = true
-            }
-            return isFound 
-        },
+        // findUser(users){
+        //     const user = users.find( user => this.email === user.email )
+        //     let isFound = false
+        //     if(user) {
+        //         // user was found 
+        //         console.log("User found!")
+        //         isFound = true
+        //     }
+        //     return isFound 
+        // },
 
         filterCards(cards) {
             // let filteredCards = new Set()

@@ -103,30 +103,4 @@ export const actions = {
             console.log("couldn't get stores")
         }
     },
-
-    async postVote({ commit }, vote) {
-        try {
-            const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
-                store_id: vote.store_id,
-                product_id: vote.product_id, 
-                email: vote.email,
-                like: vote.like, 
-                dislike: vote.dislike, 
-            });
-    
-            const { status, data } = res;
-    
-            if (status === 200) {
-                // Optionally commit a mutation to update the state with the new vote data
-                // commit('UPDATE_VOTE_DATA', data);
-                return data; // Return the data for further processing if needed
-            } else {
-                console.error(`Error: Received status code ${status}`);
-                throw new Error(`Unexpected status code when submitting vote: ${status}`);
-            }
-        } catch (error) {
-            console.error("Network error when submitting vote:", error.message);
-            return error;
-        }
-    }
 }    

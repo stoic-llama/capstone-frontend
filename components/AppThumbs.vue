@@ -75,6 +75,14 @@ export default {
             type: Number,
             default: 0,
         },
+        likesArray: {
+            type: Array,
+            default: () => [], 
+        },
+        dislikesArray: {
+            type: Array,
+            default: () => [], 
+        },
         store_id: {
             type: String,
             required: true,
@@ -100,59 +108,125 @@ export default {
             failedVoteErrorMessage: "",
         };
     },
+    mounted() {
+        // Check if the email is found in the likesArray
+        if (this.likesArray.includes(this.email)) {
+            this.like = 1; // Set like to 1 if the email is found
+        } else {
+            this.like = 0; // Set like to 0 if the email is not found
+        }
+
+        // Check if the email is found in the dislikesArray
+        if (this.dislikesArray.includes(this.email)) {
+            this.dislike = 1; // Set dislike to 1 if the email is found
+        } else {
+            this.dislike = 0; // Set dislike to 0 if the email is not found
+        }
+    },
     methods: {
-        // TODO: 
-        // 1. Get all the users who like this product.
-        // 2. Get all the users who dislike this product.
-        // 3. If user is in list of users who like this product:
-            // 3a. Then set like to true (bold).
-            // 3b. Else set like to false (not bold).
-        // 4. If user is in list of users who dislike this product:
-            // 4a. Then set dislike to true (bold).
-            // 4b. Else set dislike to false (not bold).
-    
-        // 5. When user selects like, and like is true, then ignore.
-        // 6. When user selects dislike, and dislike is true, then ignore.
-        // 7. When user selects like, and like is false, then set vote to 1.
-        // 8. When user selects dislike, and dislike is false, then set vote to -1.
+        // TODO:
+        // Clean up the URL to product API.
+
+        /*
+            Logic for Toggling:
+
+            But what happens if that was the user's first interaction?
+            We should only increase the dislikes (or likes) but NOT decrease the other one.
+            Pass both Like and Dislike together whether the user selects like or dislike.
+            
+            Route === likes:
+                If Like = 1 and Dislike = 0, backend only increase Total_likes.   
+                If Like = 1 and Dislike = 1, backend increase Total_likes and decrease Total_dislikes.
+                If Like = 0 and Dislike = 1, backend throws error.
+            
+            Route === dislikes:
+                If Dislike = 1 and Like = 0, backend only increase Total_dislikes.   
+                If Dislike = 1 and Like = 1, backend increase Total_dislikes and decrease Total_likes.
+                If Dislike = 0 and Like = 1, backend throws error.
+        */
 
         toggleLike() {            
             if(this.token !== '') {
-                if (this.like === 0) {
-                    this.like = 1; // Set like to 1
-                    this.dislike = 0; // Set dislike to 0
-                } else {
-                    this.like = 0; // Set like to 0
-                }
-                this.submitVote();
+                this.like = this.like === 1 ? 0 : 1;
+                this.submitVoteLike();
             } else {
                 this.showLoginErrorToast();
             }
         },
-        toggleDislike() {
-            if(this.token !== '') {
-                if (this.dislike === 0) {
-                    this.dislike = 1; // Set dislike to 1
-                    this.like = 0; // Set like to 0
-                } else {
-                    this.dislike = 0; // Set dislike to 0
-                }
-                this.submitVote();
-            } else {
-                this.showLoginErrorToast();
-            }
-        },
-        async submitVote() {
+
+        async submitVoteLike() {
             const vote = {
                 store_id: this.store_id,
                 product_id: this.product_id, 
                 email: this.email, 
-                like: this.like === 1 ? 'yes' : 'no',
-                dislike: this.dislike === 1 ? 'yes' : 'no',
+                like: this.like, 
+                dislike: this.dislike 
             };
 
             try {
-                const response = await this.$store.dispatch('postVote', vote);
+                const response = await this.postVoteLike(vote);
+
+                if (response.update_status == 'SUCCESS') {
+                    this.showSuccessfulVoteToast();
+
+                    setTimeout(() => {
+                        this.$router.push('/product/catalog');
+                    }, 3000); // 3000 milliseconds = 3 seconds
+                } else {
+                    this.showFailedVoteToast("Vote submission failed to update database.");
+                }
+            } catch (err) { // Use 'err' instead of 'error'
+                console.log("submitVote() error: " + err.message); // Use 'err' here
+                this.showFailedVoteToast(err.message); // Use 'err' here
+            }
+        },
+
+        async postVoteLike(vote) {
+            try {
+                const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                    store_id: vote.store_id,
+                    product_id: vote.product_id, 
+                    email: vote.email,
+                    like: vote.like, 
+                    dislike: vote.dislike, 
+                });
+        
+                const { status, data } = res;
+        
+                if (status === 200) {
+                    return data; // Return the data for further processing if needed
+                } else {
+                    console.error(`Error: Received status code ${status}`);
+                    throw new Error(`Unexpected status code when submitting vote: ${status}`);
+                }
+            } catch (error) {
+                console.error("Network error when submitting vote:", error.message);
+                throw error;
+            }
+        },
+
+        //////////////////////////////////////////////////////////////
+
+        toggleDislike() {
+            if(this.token !== '') {
+                this.dislike = this.dislike === 1 ? 0 : 1;
+                this.submitVoteDislike();
+            } else {
+                this.showLoginErrorToast();
+            }
+        },
+
+        async submitVoteDislike() {
+            const vote = {
+                store_id: this.store_id,
+                product_id: this.product_id, 
+                email: this.email, 
+                like: this.like, 
+                dislike: this.dislike 
+            };
+
+            try {
+                const response = await this.postVoteDislike(vote);
 
                 if(response.update_status == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
@@ -162,12 +236,41 @@ export default {
                     }, 3000); // 3000 milliseconds = 3 seconds
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
+                    this.showFailedVoteToast(error.message);
                 }
-            } catch (error) {
-                console.log("submitVote() error: " + error.message)
-                this.showFailedVoteToast(error.message);
+            } catch (err) {
+                console.log("submitVote() error: " + err.message)
+                this.showFailedVoteToast(err.message);
             }
         },
+
+        async postVoteDislike(vote) {
+            try {
+                const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                    store_id: vote.store_id,
+                    product_id: vote.product_id, 
+                    email: vote.email,
+                    like: vote.like, 
+                    dislike: vote.dislike, 
+                });
+        
+                const { status, data } = res;
+        
+                if (status === 200) {
+                    return data; // Return the data for further processing if needed
+                } else {
+                    console.error(`Error: Received status code ${status}`);
+                    throw new Error(`Unexpected status code when submitting vote: ${status}`);
+                }
+            } catch (error) {
+                console.error("Network error when submitting vote:", error.message);
+                throw error;
+            }
+        },
+
+
+        //////////////////////////////////////////////////////////////
+
         async showLoginErrorToast() {
             if (process.client) { 
                 const bootstrap = await import('bootstrap'); 
@@ -189,7 +292,7 @@ export default {
         async showFailedVoteToast(error) {
             this.failedVoteErrorMessage = error;
 
-            console.log("showFailedVoteToast() error: " + error)
+            // console.log("showFailedVoteToast() error: " + error)
 
             if (process.client) {
                 const bootstrap = await import('bootstrap'); 
