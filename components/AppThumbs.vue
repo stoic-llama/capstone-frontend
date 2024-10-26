@@ -169,8 +169,14 @@ export default {
                 if (response.update_status == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
 
-                    setTimeout(() => {
-                        this.$router.push('/product/catalog');
+                    // Emit an event to notify the parent component
+                    // console.log('Emitting vote-submitted event from AppThumbs');
+                    // this.$emit('vote-submitted'); 
+                    
+                    setTimeout( async () => {
+                        console.log('Attempting to force re-render of parent component');
+                        // Force a re-render of the component
+                        this.$router.go(0); // Reloads the current page
                     }, 3000); // 3000 milliseconds = 3 seconds
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
@@ -232,8 +238,14 @@ export default {
                 if(response.update_status == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
 
-                    setTimeout(() => {
-                        this.$router.push('/product/catalog');
+                    // console.log('Emitting vote-submitted event from AppThumbs');
+                    // this.$emit('vote-submitted'); 
+
+                    setTimeout( async () => {
+                        console.log('Attempting to force re-render of parent component');
+                        // Force a re-render of the component
+                        this.$router.go(0); // Reloads the current page
+
                     }, 3000); // 3000 milliseconds = 3 seconds
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
@@ -309,7 +321,7 @@ export default {
         }
         
     },
-
+    emits: ['vote-submitted'],
 };
 </script>
   
