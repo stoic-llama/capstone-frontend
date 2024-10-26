@@ -108,8 +108,10 @@
                                                 <AppThumbs 
                                                     :total_likes="Number(card.Total_likes)" 
                                                     :total_dislikes="Number(card.Total_dislikes)"
-                                                    :store_id="card.Store_id"
-                                                    :product_id="card.Product_id"
+                                                    :store_id="card.Database_Store_id"
+                                                    :product_id="card.Database_Product_id"
+                                                    :likesArray="card.Likes"
+                                                    :dislikesArray="card.Dislikes"
                                                 >
                                                 </AppThumbs>
                                             </div>
@@ -158,8 +160,8 @@
                                                 <AppThumbs 
                                                     :total_likes="Number(card.Total_likes)" 
                                                     :total_dislikes="Number(card.Total_dislikes)"
-                                                    :store_id="card.Store_id"
-                                                    :product_id="card.Product_id"
+                                                    :store_id="card.Database_Store_id"
+                                                    :product_id="card.Database_Product_id"
                                                     :likesArray="card.Likes"
                                                     :dislikesArray="card.Dislikes"
                                                 >
@@ -275,6 +277,7 @@ export default {
                 store.Store_items.forEach( (product) => {
                     // for each card added to the cards array...
                     cards.push({
+                        "Database_Store_id": store._id, // mongodb _id
                         "Company": store.Company,
                         "Zip_code": store.Zip_code,
                         "Address_line1": store.Address_line1,
@@ -285,9 +288,10 @@ export default {
                         "Longitude": store.Longitude,
                         "Latitude": store.Latitude,
                         "Store_name": store.Store_name,
-                        "Store_id": store.Store_id, // mongodb _id
+                        // "Store_id": store.Store_id, // mongodb _id
 
-                        "Internal_Product_Id": product._id, // mongodb _id
+                        "Database_Product_id": product._id, // mongodb _id,
+                        // "Internal_Product_Id": product._id, // mongodb _id
                         "Product_id": product.Product_id,
                         "Product_family": product.Product_family,
                         "Product": product.Product,

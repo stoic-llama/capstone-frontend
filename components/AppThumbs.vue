@@ -183,7 +183,8 @@ export default {
 
         async postVoteLike(vote) {
             try {
-                const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                const res = await this.$axios.post("http://localhost:5000/api/v1/product/like", {
+                // const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
                     store_id: vote.store_id,
                     product_id: vote.product_id, 
                     email: vote.email,
@@ -246,7 +247,8 @@ export default {
 
         async postVoteDislike(vote) {
             try {
-                const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                const res = await this.$axios.post("http://localhost:5000/api/v1/product/dislike", {
+                // const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
                     store_id: vote.store_id,
                     product_id: vote.product_id, 
                     email: vote.email,
