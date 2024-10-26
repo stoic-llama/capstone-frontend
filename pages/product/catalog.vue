@@ -96,7 +96,7 @@
                                     :extURL="card.Product_url" 
                                     :imgURL="card.Product_img_url" 
                                     :imgAlt="card.Product"
-                                    :key="card.Internal_Product_Id"
+                                    :key="card.Database_Product_id"
                                 >
                                     <template v-slot:title>
                                         {{ card.Product }}
@@ -148,7 +148,7 @@
                                     :extURL="card.Product_url" 
                                     :imgURL="card.Product_img_url" 
                                     :imgAlt="card.Product"
-                                    :key="card.Internal_Product_Id"
+                                    :key="card.Database_Product_id"
                                 >
                                     <template v-slot:title>
                                         {{ card.Product }}
@@ -288,10 +288,8 @@ export default {
                         "Longitude": store.Longitude,
                         "Latitude": store.Latitude,
                         "Store_name": store.Store_name,
-                        // "Store_id": store.Store_id, // mongodb _id
 
                         "Database_Product_id": product._id, // mongodb _id,
-                        // "Internal_Product_Id": product._id, // mongodb _id
                         "Product_id": product.Product_id,
                         "Product_family": product.Product_family,
                         "Product": product.Product,
@@ -320,19 +318,6 @@ export default {
 
             return cards
         },
-
-
-
-        // findUser(users){
-        //     const user = users.find( user => this.email === user.email )
-        //     let isFound = false
-        //     if(user) {
-        //         // user was found 
-        //         console.log("User found!")
-        //         isFound = true
-        //     }
-        //     return isFound 
-        // },
 
         filterCards(cards) {
             // let filteredCards = new Set()
