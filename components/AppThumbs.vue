@@ -191,7 +191,8 @@ export default {
             const token = this.$store.state.token || localStorage.getItem('authToken'); // Retrieve token
     
             try {
-                const res = await this.$axios.post(`${this.$config.baseURL}/product/like`, {
+                // const res = await this.$axios.post(`${this.$config.baseURL}/product/like`, {
+                const res = await this.$axios.post(`http://helpmybabies.com:5000/product/like`, {
                     store_id: vote.store_id,
                     product_id: vote.product_id,
                     email: vote.email,
@@ -266,7 +267,8 @@ export default {
         async postVoteDislike(vote) {
             try {
                 // const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, {
-                const res = await this.$axios.post(`${this.$config.baseURL}/product/dislike`, {
+                // const res = await this.$axios.post(`${this.$config.baseURL}/product/dislike`, {
+                const res = await this.$axios.post(`http://helpmybabies.com:5000/product/dislike`, {
                     store_id: vote.store_id,
                     product_id: vote.product_id,
                     email: vote.email,
