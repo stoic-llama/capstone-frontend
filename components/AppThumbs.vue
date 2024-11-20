@@ -146,7 +146,7 @@ export default {
         */
 
         toggleLike() {            
-            if(this.token !== '') {
+            if(this.token !== null) {
                 this.like = this.like === 1 ? 0 : 1;
                 this.submitVoteLike();
             } else {
@@ -188,12 +188,13 @@ export default {
         },
 
         async postVoteLike(vote) {
-            const token = this.$store.state.token || localStorage.getItem('authToken'); // Retrieve token
+            const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
     
             try {
                 // const res = await this.$axios.post(`${this.$config.baseURL}/product/like`, {
                 const res = await this.$axios.post(
                     `http://helpmybabies.com:5000/api/v1/product/like`,
+                    // `http://localhost:5000/api/v1/product/like`,
                     {
                         store_id: vote.store_id,
                         product_id: vote.product_id,
@@ -206,7 +207,7 @@ export default {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`,
                         },
-                        withCredentials: true  
+                        // withCredentials: true  
                     }
                 );
         
@@ -227,7 +228,7 @@ export default {
         //////////////////////////////////////////////////////////////
 
         toggleDislike() {
-            if(this.token !== '') {
+            if(this.token !== null) {
                 this.dislike = this.dislike === 1 ? 0 : 1;
                 this.submitVoteDislike();
             } else {
@@ -270,11 +271,14 @@ export default {
         },
 
         async postVoteDislike(vote) {
+            const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
+
             try {
                 // const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, {
                 // const res = await this.$axios.post(`${this.$config.baseURL}/product/dislike`, {
                 const res = await this.$axios.post(
                     `http://helpmybabies.com:5000/api/v1/product/dislike`,
+                    // `http://localhost:5000/api/v1/product/dislike`,
                     {
                         store_id: vote.store_id,
                         product_id: vote.product_id,
@@ -287,7 +291,7 @@ export default {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`,
                         },
-                        withCredentials: true  
+                        // withCredentials: true  
                     }
                 );
         
