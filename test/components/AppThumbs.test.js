@@ -86,7 +86,7 @@ describe('AppThumbs', () => {
 
     it('shows login error toast if token is empty when toggling like', async () => {
         const showLoginErrorToastSpy = jest.spyOn(wrapper.vm, 'showLoginErrorToast')
-        wrapper.vm.$store.state.token = ''
+        wrapper.vm.$store.state.token = null
         const likeButton = wrapper.findAll('button').at(0)
         await likeButton.trigger('click')
         expect(showLoginErrorToastSpy).toHaveBeenCalled()
@@ -94,7 +94,7 @@ describe('AppThumbs', () => {
 
     it('shows login error toast if token is empty when toggling dislike', async () => {
         const showLoginErrorToastSpy = jest.spyOn(wrapper.vm, 'showLoginErrorToast')
-        wrapper.vm.$store.state.token = ''
+        wrapper.vm.$store.state.token = null
         const dislikeButton = wrapper.findAll('button').at(1)
         await dislikeButton.trigger('click')
         expect(showLoginErrorToastSpy).toHaveBeenCalled()
