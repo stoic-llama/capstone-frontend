@@ -192,18 +192,23 @@ export default {
     
             try {
                 // const res = await this.$axios.post(`${this.$config.baseURL}/product/like`, {
-                const res = await this.$axios.post(`http://helpmybabies.com:5000/api/v1/product/like`, {
-                    store_id: vote.store_id,
-                    product_id: vote.product_id,
-                    email: vote.email,
-                    like: vote.like,
-                    dislike: vote.dislike,
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`, // Include token in headers
+                const res = await this.$axios.post(
+                    `http://helpmybabies.com:5000/api/v1/product/like`,
+                    {
+                        store_id: vote.store_id,
+                        product_id: vote.product_id,
+                        email: vote.email,
+                        like: vote.like,
+                        dislike: vote.dislike,
                     },
-                });
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        withCredentials: true  
+                    }
+                );
         
                 const { status, data } = res;
         
@@ -268,18 +273,23 @@ export default {
             try {
                 // const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, {
                 // const res = await this.$axios.post(`${this.$config.baseURL}/product/dislike`, {
-                const res = await this.$axios.post(`http://helpmybabies.com:5000/api/v1/product/dislike`, {
-                    store_id: vote.store_id,
-                    product_id: vote.product_id,
-                    email: vote.email,
-                    like: vote.like,
-                    dislike: vote.dislike,
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`, // Include token in headers
+                const res = await this.$axios.post(
+                    `http://helpmybabies.com:5000/api/v1/product/dislike`,
+                    {
+                        store_id: vote.store_id,
+                        product_id: vote.product_id,
+                        email: vote.email,
+                        like: vote.like,
+                        dislike: vote.dislike,
                     },
-                });
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        withCredentials: true  
+                    }
+                );
         
                 const { status, data } = res;
         
