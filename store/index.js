@@ -1,5 +1,5 @@
 export const state = () => ({
-    "token": '',
+    "token": null,
     "query": '',
     "stores": [],
     "email": '',
@@ -39,10 +39,22 @@ export const mutations = {
 }
 
 export const actions = {
+    nuxtServerInit({ commit }, { req }) {
+        // Check if the token is in cookies (for SSR)
+        if (req && req.headers.cookie) {
+            const cookies = req.headers.cookie.split(';');
+            const tokenCookie = cookies.find(c => c.trim().startsWith('authToken='));
+            if (tokenCookie) {
+                const token = tokenCookie.split('=')[1];
+                commit('UPDATE_TOKEN', token);
+            }
+        }
+    },
     actionUpdateToken: ({commit}, token) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 commit('UPDATE_TOKEN', token)
+                localStorage.setItem('authToken', token); 
                 resolve()
             }, "1000")
         })

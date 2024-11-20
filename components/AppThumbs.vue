@@ -188,14 +188,19 @@ export default {
         },
 
         async postVoteLike(vote) {
+            const token = this.$store.state.token || localStorage.getItem('authToken'); // Retrieve token
+    
             try {
-                const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/like`, { 
-                // const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/like`, {
                     store_id: vote.store_id,
-                    product_id: vote.product_id, 
+                    product_id: vote.product_id,
                     email: vote.email,
-                    like: vote.like, 
-                    dislike: vote.dislike, 
+                    like: vote.like,
+                    dislike: vote.dislike,
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include token in headers
+                    },
                 });
         
                 const { status, data } = res;
@@ -259,13 +264,16 @@ export default {
 
         async postVoteDislike(vote) {
             try {
-                const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, { 
-                // const res = await this.$axios.post("http://localhost:1000/api/v1/product/vote", {
+                const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, {
                     store_id: vote.store_id,
-                    product_id: vote.product_id, 
+                    product_id: vote.product_id,
                     email: vote.email,
-                    like: vote.like, 
-                    dislike: vote.dislike, 
+                    like: vote.like,
+                    dislike: vote.dislike,
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include token in headers
+                    },
                 });
         
                 const { status, data } = res;
