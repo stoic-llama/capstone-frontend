@@ -199,6 +199,7 @@ export default {
                     dislike: vote.dislike,
                 }, {
                     headers: {
+                        'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`, // Include token in headers
                     },
                 });
@@ -273,6 +274,7 @@ export default {
                     dislike: vote.dislike,
                 }, {
                     headers: {
+                        'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`, // Include token in headers
                     },
                 });
