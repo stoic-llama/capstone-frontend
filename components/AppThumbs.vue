@@ -166,7 +166,7 @@ export default {
             try {
                 const response = await this.postVoteLike(vote);
 
-                if (response.update_status == 'SUCCESS') {
+                if (response.message == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
 
                     // Emit an event to notify the parent component
@@ -248,7 +248,7 @@ export default {
             try {
                 const response = await this.postVoteDislike(vote);
 
-                if(response.update_status == 'SUCCESS') {
+                if(response.message == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
 
                     // console.log('Emitting vote-submitted event from AppThumbs');
