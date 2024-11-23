@@ -32,13 +32,22 @@ export const mutations = {
         state.stores = stores
     },
     UPDATE_EMAIL: (state, email) => {
-        state.email = email
+        state.email = email;
+        if (process.client && email) {
+            localStorage.setItem('userEmail', email);
+        }
     },
     UPDATE_FIRST_NAME: (state, firstName) => {
-        state.firstName = firstName
+        state.firstName = firstName;
+        if (process.client && firstName) {
+            localStorage.setItem('userFirstName', firstName);
+        }
     },
     UPDATE_LAST_NAME: (state, lastName) => {
-        state.lastName = lastName
+        state.lastName = lastName;
+        if (process.client && lastName) {
+            localStorage.setItem('userLastName', lastName);
+        }
     },
     // UPDATE_PASSWORD: (state, password) => {
         //     state.password = password

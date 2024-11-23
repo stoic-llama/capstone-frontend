@@ -185,12 +185,12 @@ export default {
             try {
                 const response = await this.postVoteLike(vote);
 
-                if (response.message == 'SUCCESS') {
+                if (response.message === 'SUCCESS') {
                     this.showSuccessfulVoteToast();
                     setTimeout(async () => {
                         console.log('Attempting to force re-render of parent component');
                         this.$router.go(0); // Reloads the current page
-                    }, 3000); // 3 seconds
+                    }, 3000);
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
                 }
@@ -201,7 +201,7 @@ export default {
         },
 
         async postVoteLike(vote) {
-            const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
+            const token = this.$store.state.token; 
     
             try {
                 const res = await this.$axios.post(
@@ -259,7 +259,7 @@ export default {
             try {
                 const response = await this.postVoteDislike(vote);
 
-                if (response.message == 'SUCCESS') {
+                if (response.message === 'SUCCESS') {
                     this.showSuccessfulVoteToast();
                     setTimeout(async () => {
                         console.log('Attempting to force re-render of parent component');
@@ -275,7 +275,7 @@ export default {
         },
 
         async postVoteDislike(vote) {
-            const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
+            const token = this.$store.state.token; 
 
             try {
                 const res = await this.$axios.post(
@@ -309,7 +309,6 @@ export default {
                 throw error;
             }
         },
-
 
         //////////////////////////////////////////////////////////////
 

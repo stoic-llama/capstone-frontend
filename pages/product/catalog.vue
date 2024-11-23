@@ -470,7 +470,6 @@ export default {
     }
 }
 </script>
-
 <style lang="scss" scoped>
 .word-wrap-block {
     display: block;
