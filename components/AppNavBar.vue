@@ -36,7 +36,7 @@
                                 <hr class="dropdown-divider">
                             </li> -->
                             <li>
-                                <NuxtLink class="dropdown-item" to="/user/logout" v-show="token !== ''">Logout</NuxtLink>
+                                <NuxtLink class="dropdown-item" to="/user/logout" v-show="token !== null">Logout</NuxtLink>
                             </li>
                         </ul>
                     </li>
