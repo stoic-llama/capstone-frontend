@@ -37,9 +37,9 @@ export default {
             });
             if (res) { 
                 await Promise.all([
-                    this.$store.dispatch('actionUpdateFirstName', ''),
-                    this.$store.dispatch('actionUpdateLastName', ''),   
-                    this.$store.dispatch('actionUpdateEmail', ''),                     
+                    this.$store.dispatch('actionUpdateFirstName', null),
+                    this.$store.dispatch('actionUpdateLastName', null),   
+                    this.$store.dispatch('actionUpdateEmail', null),                     
                     this.$store.dispatch('actionLogout'),
                 ])
                 .then(() => {

@@ -2,9 +2,9 @@ export const state = () => ({
     "token": process.client ? localStorage.getItem('authToken') : null, // if browser, then get from local storage; else null
     "query": '',
     "stores": [],
-    "email": '',
-    "firstName": '',
-    "lastName": '',
+    "email": process.client ? localStorage.getItem('userEmail') : null,
+    "firstName": process.client ? localStorage.getItem('userFirstName') : null,
+    "lastName": process.client ? localStorage.getItem('userLastName') : null,
     // "password": '',   // collect at page and then dispose; don't store it
 })
 
