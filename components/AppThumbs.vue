@@ -106,7 +106,7 @@ export default {
     },
     computed: {
         token() {
-            return this.$store.state.token; // Access token from Vuex store
+            return this.$store.state.token; 
         },
         email() {
             return this.$store.state.email;
@@ -130,27 +130,22 @@ export default {
         console.log("mounted() invoked for store: " + this.store_id + " and product: " + this.product_id)
         console.log("evaluating user: " + this.email)
         
-        // Check if the email is found in the likesArray
         if (this.likesArray.includes(this.email)) {
-            this.like = 1; // Set like to 1 if the email is found
+            this.like = 1; 
         } else {
-            this.like = 0; // Set like to 0 if the email is not found
+            this.like = 0; 
         }
 
-        // Check if the email is found in the dislikesArray
         if (this.dislikesArray.includes(this.email)) {
-            this.dislike = 1; // Set dislike to 1 if the email is found
+            this.dislike = 1; 
         } else {
-            this.dislike = 0; // Set dislike to 0 if the email is not found
+            this.dislike = 0; 
         }
 
         console.log("like: " + this.like)
         console.log("dislike: " + this.dislike)
     },
     methods: {
-        // TODO:
-        // Clean up the URL to product API.
-
         /*
             Logic for Toggling:
 
@@ -181,10 +176,10 @@ export default {
         async submitVoteLike() {
             const vote = {
                 store_id: this.store_id,
-                product_id: this.product_id, 
-                email: this.email, 
-                like: this.like, 
-                dislike: this.dislike 
+                product_id: this.product_id,
+                email: this.email,
+                like: this.like,
+                dislike: this.dislike,
             };
 
             try {
@@ -192,17 +187,16 @@ export default {
 
                 if (response.message == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
-                    
-                    setTimeout( async () => {
+                    setTimeout(async () => {
                         console.log('Attempting to force re-render of parent component');
                         this.$router.go(0); // Reloads the current page
                     }, 3000); // 3 seconds
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
                 }
-            } catch (err) { // Use 'err' instead of 'error'
-                console.log("submitVote() error: " + err.message); // Use 'err' here
-                this.showFailedVoteToast(err.message); // Use 'err' here
+            } catch (err) {
+                console.log("submitVote() error: " + err.message);
+                this.showFailedVoteToast(err.message);
             }
         },
 
@@ -210,11 +204,8 @@ export default {
             const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
     
             try {
-                // const res = await this.$axios.post(`${this.$config.baseURL}/product/like`, {
                 const res = await this.$axios.post(
                     this.$config.baseURL + `/product/like`,
-                    // `http://helpmybabies.com:5000/api/v1/product/like`,
-                    // `http://localhost:5000/api/v1/product/like`,
                     {
                         store_id: vote.store_id,
                         product_id: vote.product_id,
@@ -259,28 +250,26 @@ export default {
         async submitVoteDislike() {
             const vote = {
                 store_id: this.store_id,
-                product_id: this.product_id, 
-                email: this.email, 
-                like: this.like, 
-                dislike: this.dislike 
+                product_id: this.product_id,
+                email: this.email,
+                like: this.like,
+                dislike: this.dislike,
             };
 
             try {
                 const response = await this.postVoteDislike(vote);
 
-                if(response.message == 'SUCCESS') {
+                if (response.message == 'SUCCESS') {
                     this.showSuccessfulVoteToast();
-
-                    setTimeout( async () => {
+                    setTimeout(async () => {
                         console.log('Attempting to force re-render of parent component');
                         this.$router.go(0); // Reloads the current page
                     }, 3000); // 3 seconds
                 } else {
                     this.showFailedVoteToast("Vote submission failed to update database.");
-                    this.showFailedVoteToast(error.message);
                 }
             } catch (err) {
-                console.log("submitVote() error: " + err.message)
+                console.log("submitVote() error: " + err.message);
                 this.showFailedVoteToast(err.message);
             }
         },
@@ -289,12 +278,8 @@ export default {
             const token = this.$store.state.token; // || localStorage.getItem('authToken'); // Retrieve token
 
             try {
-                // const res = await this.$axios.post(`${process.env.API_BASE_URL}/product/dislike`, {
-                // const res = await this.$axios.post(`${this.$config.baseURL}/product/dislike`, {
                 const res = await this.$axios.post(
                     this.$config.baseURL + `/product/dislike`,
-                    // `http://helpmybabies.com:5000/api/v1/product/dislike`,
-                    // `http://localhost:5000/api/v1/product/dislike`,
                     {
                         store_id: vote.store_id,
                         product_id: vote.product_id,
