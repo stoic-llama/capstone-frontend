@@ -7,7 +7,7 @@
             </NuxtLink>
             <div class="d-flex align-items-center">
                 <div>
-                    <span class="greeting">{{ firstName === '' ? 'Hello Guest' : `Hello ${firstName}`}} </span> 
+                    <span class="greeting">{{ firstName === null ? 'Hello Guest' : `Hello ${firstName}`}} </span> 
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
