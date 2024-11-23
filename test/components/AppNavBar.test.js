@@ -22,8 +22,8 @@ describe('AppNavBar.vue', () => {
   beforeEach(() => {
     // Mock Vuex state
     state = {
-      token: '',
-      firstName: '',
+      token: null,
+      firstName: null,
     };
 
     // Create Vuex store with the mocked state
