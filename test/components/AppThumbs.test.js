@@ -38,10 +38,13 @@ describe('AppThumbs', () => {
             localVue,
             mocks: {
                 $axios: {
-                    post: jest.fn().mockResolvedValue({ status: 200, data: { update_status: 'SUCCESS' } })
+                    post: jest.fn().mockResolvedValue({ status: 200, data: { 'message': 'SUCCESS' } })
                 },
                 $router: {
                     push: jest.fn()
+                },
+                $config: {
+                    baseURL: 'http://localhost:5000/api/v1'
                 }
             },
             stubs: ['NuxtLink']
