@@ -36,11 +36,11 @@ export default {
                 headers: { Authorization: 'Bearer ' + this.token }
             });
             if (res) { 
-                Promise.all([
+                await Promise.all([
                     this.$store.dispatch('actionUpdateFirstName', ''),
                     this.$store.dispatch('actionUpdateLastName', ''),   
                     this.$store.dispatch('actionUpdateEmail', ''),                     
-                    this.$store.dispatch('actionUpdateToken', ''),
+                    this.$store.dispatch('actionLogout'),
                 ])
                 .then(() => {
                     this.$router.push('/')

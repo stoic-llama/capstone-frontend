@@ -1,5 +1,5 @@
 export const state = () => ({
-    "token": null,
+    "token": process.client ? localStorage.getItem('authToken') : null, // if browser, then get from local storage; else null
     "query": '',
     "stores": [],
     "email": '',
@@ -16,7 +16,14 @@ export const state = () => ({
 
 export const mutations = {
     UPDATE_TOKEN: (state, token) => {
-        state.token = token
+        state.token = token;
+        if (process.client) {
+            if (token) {
+                localStorage.setItem('authToken', token);
+            } else {
+                localStorage.removeItem('authToken');
+            }
+        }
     },
     UPDATE_QUERY: (state, query) => {
         state.query = query
@@ -114,5 +121,8 @@ export const actions = {
             // Handle error here
             console.log("couldn't get stores")
         }
+    },
+    actionLogout: ({ commit }) => {
+        commit('UPDATE_TOKEN', null);
     },
 }    
