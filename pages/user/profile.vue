@@ -55,7 +55,8 @@ export default {
     },
     mounted () {
         const email = this.$store.state.email
-        if (!email) {
+        const token = this.$store.state.token
+        if (!email || !token) {
             this.$router.push('/user/lookup')
         } 
     },
