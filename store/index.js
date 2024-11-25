@@ -17,12 +17,8 @@ export const state = () => ({
 export const mutations = {
     UPDATE_TOKEN: (state, token) => {
         state.token = token;
-        if (process.client) {
-            if (token) {
-                localStorage.setItem('authToken', token);
-            } else {
-                localStorage.removeItem('authToken');
-            }
+        if (process.client && token) {
+            localStorage.setItem('authToken', token); 
         }
     },
     UPDATE_QUERY: (state, query) => {
@@ -132,6 +128,16 @@ export const actions = {
         }
     },
     actionLogout: ({ commit }) => {
+        if (process.client) {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userFirstName');
+            localStorage.removeItem('userLastName');
+            localStorage.removeItem('authToken');
+        }
+
+        commit('UPDATE_EMAIL', null);
+        commit('UPDATE_FIRST_NAME', null);
+        commit('UPDATE_LAST_NAME', null);
         commit('UPDATE_TOKEN', null);
     },
 }    
