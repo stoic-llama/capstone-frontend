@@ -30,14 +30,9 @@
                         My Account
                         </NuxtLink>
                         <ul class="dropdown-menu">
-                            <li><NuxtLink class="dropdown-item" to="/user/profile">My Profile</NuxtLink></li>
-    
-                            <!-- <li>
-                                <hr class="dropdown-divider">
-                            </li> -->
-                            <li>
-                                <NuxtLink class="dropdown-item" to="/user/logout" v-show="token !== null">Logout</NuxtLink>
-                            </li>
+                            <li><NuxtLink class="dropdown-item" to="/user/lookup" v-show="token === null">Login</NuxtLink></li>
+                            <li><NuxtLink class="dropdown-item" to="/user/profile" v-show="token !== null">My Profile</NuxtLink></li>
+                            <li><NuxtLink class="dropdown-item" to="/user/logout" v-show="token !== null">Logout</NuxtLink></li>
                         </ul>
                     </li>
                     </ul>
