@@ -127,8 +127,8 @@ export default {
         };
     },
     mounted() {
-        console.log("mounted() invoked for store: " + this.store_id + " and product: " + this.product_id)
-        console.log("evaluating user: " + this.email)
+        // console.log("mounted() invoked for store: " + this.store_id + " and product: " + this.product_id)
+        // console.log("evaluating user: " + this.email)
         
         if (this.likesArray.includes(this.email)) {
             this.like = 1; 
@@ -142,8 +142,8 @@ export default {
             this.dislike = 0; 
         }
 
-        console.log("like: " + this.like)
-        console.log("dislike: " + this.dislike)
+        // console.log("like: " + this.like)
+        // console.log("dislike: " + this.dislike)
     },
     methods: {
         /*
